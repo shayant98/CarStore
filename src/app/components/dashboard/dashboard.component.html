@@ -1,0 +1,13 @@
+<div class="container">
+  <div class="row mb-3">
+    <div class="col-md-4 mt-3" *ngFor="let category of categories">
+      <div class="card">
+        <img class="card-img-top img-fluid img-center mx-auto d-block mt-3" [src]='category.img' alt="Window Image">
+        <div class="card-body">
+          <a [routerLink]="['/products', category.name]" href=""><button type="button " class="btn btn-outline-primary btn-block">{{category.name
+              | titlecase}}</button></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
