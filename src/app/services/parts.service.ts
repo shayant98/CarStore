@@ -31,6 +31,19 @@ export class PartsService {
     return this.parts
 
   }
+
+  searchParts(startAt, EndAt, category): Observable<Part[]> {
+
+    this.parts = this.afs.collection('parts', ref => ref.where('category', '==', category).orderBy('partNumber').startAt(startAt).endAt(EndAt)).snapshotChanges().pipe(map(changes => {
+      return changes.map(action => {
+        const part = action.payload.doc.data() as Part
+        part.id = action.payload.doc.id
+        return part
+      })
+    }));
+
+    return this.parts
+  }
 }
 
 

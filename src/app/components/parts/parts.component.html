@@ -1,0 +1,68 @@
+<a [routerLink]="['/']" class="btn btn-outline-primary ml-2 mb-2">Back to Dashboard</a>
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-6 mx-auto">
+        <h1 class="text-center text-primary">
+          {{currentCategory| titlecase}}
+        </h1>
+      </div>
+    </div>
+    <div class="row mt-3">
+      <div class="col">
+        <div class="col-auto">
+          <label class="sr-only" for="inlineFormInputGroup">Search</label>
+          <div class="input-group mb-2">
+            <div class="input-group-prepend">
+              <div class="input-group-text">Search</div>
+            </div>
+            <input type="text" class="form-control" placeholder=" search {{currentCategory| titlecase}}" [(ngModel)]="searchTerm"
+              (keyup)="searchPart($event)">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="mb-3">
+  <div class="container-fluid">
+    <div class="row mb-2" *ngIf="parts?.length > 0; else noParts">
+      <div class="col-md-2" *ngFor="let part of parts; ">
+        <div class="card">
+          <img class="card-img-top mx-auto  img-fluid" [src]="part.img" alt="Card image cap">
+          <div class="card-body">
+            <h5 class="card-title text-center">{{part.name}}</h5>
+            <dl class="row">
+              <dt class="col-sm-5">Partnumber</dt>
+              <dd class="col-sm-5">{{part.partNumber}}</dd>
+              <dt class="col-sm-5">Manufacturer</dt>
+              <dd class="col-sm-5">
+                {{part.manufacturer}}
+              </dd>
+
+              <dt class="col-sm-4">Description</dt>
+              <dd class="col-sm-8">
+                <ul class="">
+                  <li><small>dimension - {{part.description?.dimension}}</small></li>
+                  <li><small>dimension - {{part.description?.dimension}}</small></li>
+                  <li><small>dimension - {{part.description?.dimension}}</small></li>
+                  <li><small>dimension - {{part.description?.dimension}}</small></li>
+                </ul>
+              </dd>
+              <dt class="col-sm-5">Price</dt>
+              <dd class="col-sm-5">
+                {{part.price}}
+              </dd>
+            </dl>
+            <a href="#" [routerLink]="['/product', part.id]" class="btn btn btn-outline-primary btn-sm">View details</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<ng-template #noParts>
+  <h1 class="font-weight-bold display-3">No Parts found...</h1>
+</ng-template>
